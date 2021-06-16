@@ -10,11 +10,13 @@ public class HandgunAmmoPick : MonoBehaviour
     public GameObject pickupDisplay;
 
     public void OnTriggerEnter(Collider other){
+        Debug.Log("Inside");
         fakeAmmoClip.SetActive(false);
         ammoPickupFX.Play();
         GlobalAmmo.handgunAmmo += 10;
         pickupDisplay.SetActive(false);
         pickupDisplay.GetComponent<Text>().text = "CLIP OF BULLETS";
         pickupDisplay.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

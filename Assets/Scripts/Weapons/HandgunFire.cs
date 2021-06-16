@@ -9,12 +9,16 @@ public class HandgunFire : MonoBehaviour
     public AudioSource gunFire;
     public AudioSource emptyAmmo;
     public bool isFiring = false;
+    public float targetDistance;
+    public int damageAmount = 5;
 
     void Update()
     {
+        Debug.DrawLine(this.transform.position,this.transform.position + this.transform.TransformDirection(Vector3.down), Color.red);
         if (Input.GetButtonDown("Fire1")){
             if(GlobalAmmo.handgunAmmo<1){
                 emptyAmmo.Play();
+                
             }
             else{
                 if(isFiring==false){
@@ -25,6 +29,13 @@ public class HandgunFire : MonoBehaviour
     }
 
     IEnumerator FiringHandgun(){
+        RaycastHit theShot;
+        Debug.Log("HERE!");
+        if(Physics.Raycast(transform.position,transform.position+transform.TransformDirection(Vector3.down), out theShot)){
+            targetDistance = theShot.distance;
+            Debug.Log("shotmade");
+            theShot.transform.SendMessage("DamageEnemy", damageAmount, SendMessageOptions.DontRequireReceiver);
+        }
         isFiring = true;
         theGun.GetComponent<Animator>().Play("HandgunFire");
         muzzleFlash.SetActive(true);

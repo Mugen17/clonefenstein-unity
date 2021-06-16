@@ -6,11 +6,13 @@ public class DoorOpenFirst : MonoBehaviour
 {
     public GameObject theDoor;
     public AudioSource doorFX;
+    public GameObject pairTrigger;
 
     void OnTriggerEnter(Collider other){
         doorFX.Play();
         theDoor.GetComponent<Animator>().Play("DoorOpen");
         this.GetComponent<BoxCollider>().enabled = false;
+        pairTrigger.GetComponent<BoxCollider>().enabled = false;
         StartCoroutine(CloseDoor());
     }
 
@@ -19,5 +21,7 @@ public class DoorOpenFirst : MonoBehaviour
         doorFX.Play();
         theDoor.GetComponent<Animator>().Play("DoorClose");
         this.GetComponent<BoxCollider>().enabled = true;
+        pairTrigger.GetComponent<BoxCollider>().enabled = true;
+
     }
 }

@@ -5,9 +5,10 @@ using UnityEngine;
 public class LookPlayer : MonoBehaviour
 {
     public Transform thePlayer;
+    public GameObject theEnemy;
 
     void Update()
     {
-        transform.LookAt(thePlayer);
+        theEnemy.transform.LookAt(thePlayer);
     }
 }
